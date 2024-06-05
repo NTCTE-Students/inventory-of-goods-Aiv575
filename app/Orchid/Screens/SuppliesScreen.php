@@ -6,6 +6,8 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use App\Models\Supply;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\TD;
+use App\Orchid\Layouts\SuppliesLayout;
 
 class SuppliesScreen extends Screen
 {
@@ -53,9 +55,28 @@ class SuppliesScreen extends Screen
     public function layout(): iterable
     {
         return [
-            Layout::table('supplies', [
-                
-            ]),
+            SuppliesLayout::class
+            // Layout::table('supplies', [
+            //     TD::make('id', 'ID')
+            //     ->sort()
+            //     ->filter(TD::FILTER_NUMERIC),
+            //     TD::make('name', 'Название')
+            //         ->sort()
+            //         ->filter(TD::FILTER_TEXT),
+            //     TD::make('description', 'Описание'),
+            //     TD::make('price', 'Цена (в копейках)'),
+            //     TD::make('amont', 'Количество'),
+            //     TD::make('created_at', 'Дата создания')
+            //         ->sort()
+            //         ->render(function (Supply $supply) {
+            //             return $supply->created_at->toDateString();
+            //         }),
+            //     TD::make('updated_at', 'Дата обновления')
+            //         ->sort()
+            //         ->render(function (Supply $supply) {
+            //             return $supply->updated_at->toDateString();
+            //         }),
+            // ])
         ];
     }
 }
