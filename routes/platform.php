@@ -21,6 +21,7 @@ use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\SuppliesEditScreen;
+use App\Orchid\Screens\SuppliesSearchScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,3 +109,4 @@ Route::screen('/examples/cards', ExampleCardsScreen::class)->name('platform.exam
 
 Route::screen('/supplies', SuppliesScreen::class)->name('platform.supplies');
 Route::screen('/supply/{supply_id?}', SuppliesEditScreen::class)->name('platform.supply');
+Route::screen('/search', SuppliesSearchScreen::class)->name('platform.search');

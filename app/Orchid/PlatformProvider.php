@@ -38,6 +38,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('bs.cart')
                 ->title('Товары')
                 ->route('platform.supplies'),
+            Menu::make('Поиск')
+                ->icon('bs.search')
+                ->title('Поиск')
+                ->route('platform.search'),
         ];
     }
 
