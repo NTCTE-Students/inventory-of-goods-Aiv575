@@ -28,15 +28,11 @@ class SuppliesLayout extends Table
     {
         return [
             TD::make('id', 'ID')
-                ->sort()
-                ->filter(TD::FILTER_NUMERIC)
                 ->render(function (Supply $supply) {
                     return Link::make($supply->id)
                         ->route('platform.supply', $supply);
                 }),
             TD::make('name', 'Название')
-                ->sort()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Supply $supply) {
                     return Link::make($supply->name)
                         ->route('platform.supply', $supply);
@@ -45,12 +41,10 @@ class SuppliesLayout extends Table
             TD::make('price', 'Цена (в копейках)'),
             TD::make('amont', 'Количество'),
             TD::make('created_at', 'Дата создания')
-                ->sort()
                 ->render(function (Supply $supply) {
                     return $supply->created_at->toDateString();
                 }),
             TD::make('updated_at', 'Дата обновления')
-                ->sort()
                 ->render(function (Supply $supply) {
                     return $supply->updated_at->toDateString();
                 }),

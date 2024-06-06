@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
+use App\Models\SupplyIssue;
 
 class Supply extends Model
 {
@@ -17,7 +18,8 @@ class Supply extends Model
         "amont"
     ];
 
-    protected $casts = [
-
-    ];
+    public function issues()
+    {
+        return $this->hasMany(SupplyIssue::class);
+    }
 }

@@ -9,10 +9,12 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\TD;
+use Orchid\Screen\Actions\Link;
 
 class SuppliesSearchScreen extends Screen
 {
-    public $quety = '';
+    public $query = '';
+
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -27,8 +29,8 @@ class SuppliesSearchScreen extends Screen
                            ->get();
 
         return [
-            '$supplies' => $supplies,
-            'quary' => $query
+            'supplies' => $supplies,
+            'query' => $query
         ];
     }
 
@@ -52,7 +54,7 @@ class SuppliesSearchScreen extends Screen
         return [
             Button::make('Искать')
                 ->method('search')
-                ->icon('magnifier'),
+                ->icon('bs.search'),
         ];
     }
 
@@ -69,21 +71,30 @@ class SuppliesSearchScreen extends Screen
                     ->title('Поиск')
                     ->type('text')
                     ->placeholder('Введите запрос для поиска...')
-                    ->value('query'),
-                Layout::table('supplies', [
-                    TD::make('name', 'Название'),
-                    TD::make('description', 'Описание'),
-                    TD::make('price', 'Цена (в копейках)'),
-                    TD::make('amont', 'Количество'),
-                    TD::make('created_at', 'Дата создания'),
-                    TD::make('updated_at', 'Дата обновления')
-                ]),
-            ])
+                    ->value($this->query),
+            ]),
+            Layout::table('supplies', [
+                TD::make('id', 'ID')
+                ->render(function (Supply $supply) {
+                    return Link::make($supply->id)
+                        ->route('platform.supply', $supply);
+                }),
+            TD::make('name', 'Название')
+                ->render(function (Supply $supply) {
+                    return Link::make($supply->name)
+                        ->route('platform.supply', $supply);
+                }),
+                TD::make('description', 'Описание'),
+                TD::make('price', 'Цена (в копейках)'),
+                TD::make('amount', 'Количество'),
+                TD::make('created_at', 'Дата создания'),
+                TD::make('updated_at', 'Дата обновления')
+            ]),
         ];
     }
 
     public function search(Request $request)
     {
-        return redirect()->route('platform.search', ['query' => $request->input('quary')]);
+        return redirect()->route('platform.supplies.search', ['query' => $request->input('query')]);
     }
 }
